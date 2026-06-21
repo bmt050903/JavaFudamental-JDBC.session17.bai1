@@ -19,7 +19,7 @@ AS $$
       VALUES (p_title, p_director, p_year);
 END;
 $$;
----Stored list_movies
+---Stored Procedure list_movies
 CREATE OR REPLACE PROCEDURE add_movie(
     p_title VARCHAR,
     p_director VARCHAR,
