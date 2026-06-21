@@ -36,10 +36,9 @@ public class MovieManagement {
         try {
             Connection conn = ConnectionDatabase.getConnection();
 
-            PreparedStatement ps =
-                    conn.prepareStatement("SELECT * FROM movies");
+            CallableStatement call = conn.prepareCall("SELECT * FROM list_movies()");
 
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs = call.executeQuery();
 
             while (rs.next()) {
                 Movie movie = new Movie();

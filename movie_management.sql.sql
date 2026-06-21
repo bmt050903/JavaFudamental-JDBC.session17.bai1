@@ -7,19 +7,6 @@ CREATE TABLE movies (
 );
 
 ---Stored Procedure add_movie
-CREATE OR REPLACE FUNCTION add_movie(
-    p_title VARCHAR,
-    p_director VARCHAR,
-    p_year INT
-)
-LANGUAGE plpgsql
-AS $$
-  BEGIN
-      INSERT INTO movies(title, director, release_year)
-      VALUES (p_title, p_director, p_year);
-END;
-$$;
----Stored list_movies
 CREATE OR REPLACE PROCEDURE add_movie(
     p_title VARCHAR,
     p_director VARCHAR,
@@ -30,6 +17,21 @@ AS $$
 BEGIN
     INSERT INTO movies(title, director, release_year)
     VALUES (p_title, p_director, p_year);
+END;
+$$;
+---FUNCTION list_movies
+CREATE OR REPLACE FUNCTION list_movies()
+    RETURNS TABLE(
+    id INT,
+    title VARCHAR,
+    director VARCHAR,
+    release_year INT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY SELECT m.id,m.title,m.director,m.release_year
+    FROM movies m;
 END;
 $$;
 
